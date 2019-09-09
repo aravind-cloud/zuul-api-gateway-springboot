@@ -1,0 +1,30 @@
+server:
+  port: 9900
+
+spring:
+  application:
+    name: zuul-proxy-server
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/
+
+zuul:
+  prefix: /api
+  routes:
+    client-with-url:
+      path: /client/**
+      url: http://localhost:9000/client/greeting
+    client-with-service-id:
+      path: /micro1/**
+      serviceId: SERVICE1
+    MicroService2:
+      path: /micro2/**
+      serviceId: SERVICE2
+    MicroService3:
+      path: /micro3/**
+      serviceId: SERVICE3
+
+ribbon:
+  ReadTimeout: 60000
